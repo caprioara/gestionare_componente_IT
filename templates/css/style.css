@@ -1,0 +1,80 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #202020;
+    font-family: 'Rubik', sans-serif;
+}
+
+
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    background-image: url("../media/bg1.jpg");
+    background-size: cover; 
+    border-radius: 1em
+}
+
+
+
+.container-left {
+    border-radius: 1em 0 0 1em;
+    width: 45%;
+    background-color: rgba(10,10,10,0.9);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    padding: 2em;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 50%;
+}
+
+
+input[type=text], input[type=password], .login button {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0.25em;
+    height: 1.5rem;
+    color: #000;
+    margin-bottom: 1em;
+}
+
+.login button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+form {
+    /* margin: auto; */
+}
+
+.logo h3 {
+    width: 200px;
+}
+
+h3 {
+    display: inline;
+    margin-bottom: 2em;
+}
+
+p, label, input, h3 {
+    display: block;
+    color: white;
+    margin: 0;
+}
+
+.br {
+    border: 1px solid red;
+}
