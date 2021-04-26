@@ -1,41 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-</head>
+    <body class="bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-light">
+            <a class="navbar-brand font-weight-bold" href="http://127.0.0.1:5500/templates/products.html">Secta Pinguinului</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<body>
-
- <div class="container">
-        <div class="container-left">
-            <div class="login">
-                <div class="logo">
-                    <h3>Welcome to Secta Pinguinului</h3>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:5500/templates/products.html">Produse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="addProduct" href="http://127.0.0.1:5500/templates/add.html" hidden>Adauga Produse</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" id="login" href="http://127.0.0.1:5500/templates/login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="logout" hidden>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="container-left">
+                <div class="login">
+                    <div class="logo">
+                        <h3>Welcome to Secta Pinguinului</h3>
+                    </div>
+                    <form>
+                        <label for="">Username: </label>
+                        <input type="text" name="username" class="username" />
+                        <label for="">Password: </label>
+                        <input type="password" name="password" class="password" />
+                    </form>
+                    <button type="submit" value="Submit" class="butonSubmit" id="loginButton">Log In</button>
                 </div>
-                <form>
-                    <label for="">Username: </label>
-                    <input type="text" name="username" class="username">
-                    <label for="">Password: </label>
-                    <input type="password" name="password" class="password">
-                </form>
-                <button type="submit" value="Submit" class="butonSubmit" onclick="submit()">Log In</button>
             </div>
         </div>
-    </div>
+    </body>
 
-</body>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"
+    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="./login.js"></script>
+    <script src="logout.js"></script>
 
+    <script>
+        document.getElementById('loginButton').addEventListener('click', async (e) => {
+            const username = document.querySelector('.username');
+            const password = document.querySelector('.password');
+            const data = {
+                username: username.value,
+                password: password.value
+            };
 
-
+            let res = await fetch('http://89.136.170.156:5000/login', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            let user = await res.json();
+            if (user?.success) {
+                localStorage.setItem('user', user.user.username);
+                window.location.replace('http://127.0.0.1:5500/templates/products.html');
+            }
+        });
+    </script>
 </html>
