@@ -27,6 +27,7 @@ router.post(
             if (req.body?.image) product.image = req?.body?.image;
             if (req.body?.price) product.price = req?.body?.price;
             if (req.body?.stock) product.stock = req?.body?.stock;
+            if (req.body?.details) product.details = req?.body?.details;
 
             await product.save();
 
